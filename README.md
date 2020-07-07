@@ -38,7 +38,7 @@ ng generate component component_name
 * Эта команда создаёт в папке `app/`:
 ```bash
 heroes/
-  heroes.component.css
+  heroes.component.css # Создаётся пустым
   heroes.component.html
   heroes.component.spec.ts
   heroes.component.ts
@@ -51,7 +51,7 @@ heroes/
 * `ngOnInit()` - хук жизненнго цикла. Angular вызывает этот метод сразу после создания компонента. Хорошее место для инициализации логики.
 * Всегда экспортируйте класс с помощью `export`, чтобы можно было импортировать его с помощью `import` где-нибудь в другом месте.
 * Чтобы отобразить компонент (в нашем случае `HeroesComponent`), необходимо добавить его в шаблон `AppComponent`.
-* После добавления объекта:
+* После добавления объекта (это объявление + инициализация):
   ```typescript
   hero: Hero = {
     id: 1,
@@ -70,3 +70,20 @@ heroes/
 * Все компоненты должны добавляться в `AppModule`.
   * Компоненты добалвяются в блок `declarations`.
   * Модули добавляются в блок `imports`.
+* Директива `*ngFor` повторит всё, в т.ч. и хостовой элемент (`<li>`):
+  ```html
+  <li *ngFor="let hero of heroes">
+  ```
+* Приватный стили инлайнятся в `@Component.styles` массиве или определяются как ccs-файлы в `@Component.styleUrls` массиве.
+* Привязка события к методу:
+  ```html
+  <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+  ```
+* Директива `*ngIf` проверяет условие:
+  ```html
+  <div *ngIf="selectedHero">
+  ```
+* Директива `[class.selected]="hero === selectedHero"` позволяет применять класс по условию.
+  ```html
+  <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero"></li>
+  ```
