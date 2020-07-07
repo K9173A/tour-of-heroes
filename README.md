@@ -87,3 +87,15 @@ heroes/
   ```html
   <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero"></li>
   ```
+* Директива `@Input()`:
+  * Похоже, что это аналог проброса пропсов во Vue.js. И мы объявляем этот декоратор, чтобы показать, что значение будет проброшено из родительского элемента.
+  * Шаблон `HeroDetailComponent` связан с атрибутом `hero`.
+  * Атрибут `Hero` должен быть input-атрибутом, задекорированным с помощью `@input()`, потому что внешний `HeroesComponent` будет байндить к нему так.
+    ```html
+    <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+    ```
+  * Для этого нужно добавить: `import { Input } from '@angular/core';`
+* Родительский компонент (`HeroesComponent`) будет контролировать дочерний компонент (`HeroDetailComponent`) с помощью отправки ему нового герия для отображения, когда пользователь выбирает геория из списка.
+* Property binding: `[hero]="selectedHero"`.
+  * Это однонаправленный байндинг из атрибута `selectedHero` (`HeroesComponent`) в атрибут `hero` целевого элемента, который маппит `hero` у `HeroDetailComponent`.
+  * Тперь, когда пользователь кликает по герою в списке, `selectedHero` изменяется. Когда `selectedHero` изменяется, property binding обновляет `hero` и `HeroDetailComponent` отображает нового героя.
